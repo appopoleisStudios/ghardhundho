@@ -25,6 +25,10 @@ License: For each use you must have a valid license purchased only from above li
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <!-- End fonts -->
 
+
+  <link rel="stylesheet" href="{{asset('backend/assets/vendors/select2/select2.min.css')}}">
+<link rel="stylesheet" href="{{asset('backend/assets/vendors/jquery-tags-input/jquery.tagsinput.min.css')}}">
+
   
 	<!-- Plugin css for this page -->
 	<link rel="stylesheet" href="{{asset('backend/assets/vendors/datatables.net-bs5/dataTables.bootstrap5.css')}}">
@@ -128,6 +132,21 @@ License: For each use you must have a valid license purchased only from above li
 	<script src="{{asset('backend/assets/vendors/datatables.net-bs5/dataTables.bootstrap5.js')}}"></script>
   <script src="{{asset('backend/assets/js/data-table.js')}}"></script>
   <!-- End DataTable -->
+
+  {{-- Input Tags --}}
+	<script src="{{asset('backend/assets/vendors/inputmask/jquery.inputmask.min.js')}}"></script>
+	<script src="{{asset('backend/assets/vendors/select2/select2.min.js')}}"></script>
+	<script src="{{asset('backend/assets/vendors/typeahead.js/typeahead.bundle.min.js')}}"></script>
+	<script src="{{asset('backend/assets/vendors/jquery-tags-input/jquery.tagsinput.min.js')}}"></script>
+	<script src="{{asset('backend/assets/js/inputmask.js')}}"></script>
+	<script src="{{asset('backend/assets/js/select2.js')}}"></script>
+	<script src="{{asset('backend/assets/js/typeahead.js')}}"></script>
+	<script src="{{asset('backend/assets/js/tags-input.js')}}"></script>
+
+	{{-- tinymce start--}}
+	<script src="{{asset('backend/assets/vendors/tinymce/tinymce.min.js')}}"></script>
+	<script src="{{asset('backend/assets/js/tinymce.js')}}"></script>
+	{{-- tinymce end --}}
 
 </body>
 </html>    
