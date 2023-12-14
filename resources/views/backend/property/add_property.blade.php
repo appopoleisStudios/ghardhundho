@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <h6 class="card-title">Add Property</h6>
                     
-                    <form method="POST" action="" id="myForm" enctype="multipart/form-data">
+                    <form method="POST" action="{{route('store.property')}}" id="myForm" enctype="multipart/form-data">
                     @csrf
 
                         <div class="row">
@@ -57,10 +57,10 @@
                             <div class="col-sm-6">
                                 <div class="form-group mb-3">
                                     <label class="form-label">Main Thumbnail</label>
-                                    <input type="file" name="property_thumbnail	" class="form-control"
+                                    <input type="file" name="property_thumbnail" class="form-control"
                                     onChange="mainThamUrl(this)" >
 
-                                    <img class="mt-1" src="" id="mainThmb">
+                                    <img src="" id="mainThmb">
 
                                 </div>
                             </div><!-- Col -->
@@ -233,12 +233,12 @@
                         <div class="col-sm-12">
                             <div class="mb-3">
                                 <label class="form-label">Short Description</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea name="short_descp" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div><!-- Col -->
                         <div class="col-sm-12">
                             <div class="mb-3">
                                 <label class="form-label">Long Description</label>
-								<textarea class="form-control" name="tinymce" id="tinymceExample" rows="10"></textarea>
+								<textarea name="long_descp" class="form-control" name="tinymce" id="tinymceExample" rows="10"></textarea>
                         </div><!-- Col -->
 
                         <hr>
@@ -429,17 +429,17 @@
 </script>
 
 {{-- main Thumbnail --}}
-<script>
+<script type="text/javascript">
     function mainThamUrl(input){
-        if (input.files && input.files[0]){
+        if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e){
-                $('#mainThmb').attr('src',e.target.result).width(80).height(80);
+              $('#mainThmb').attr('src',e.target.result).width(80).height(80);
             };
-            reader.readAsDataURL(input.files[0])
+            reader.readAsDataURL(input.files[0]);
         }
-    }
-</script>
+    } 
+ </script>
 
 {{-- Multi Img --}}
 <script> 
