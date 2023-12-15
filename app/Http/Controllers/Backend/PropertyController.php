@@ -14,6 +14,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Carbon\Carbon;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\EncodedImage;
 
 class PropertyController extends Controller
 {
@@ -51,7 +52,9 @@ class PropertyController extends Controller
         $image = $request->file('property_thumbnail');
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
         $img = $manager->read($image)->resize(370,250);
-        // $img->save('upload/property/thumbnail/'.$name_gen);
+        $encoded = $img->toJpg();
+        // save encoded image
+        $encoded->save('upload/property/thumbnail/'.$name_gen);
         $save_url= 'upload/property/thumbnail/'.$name_gen;
 
         $property_id = Property::insertGetId([
@@ -98,8 +101,12 @@ class PropertyController extends Controller
 
         $make_name = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
         $imgs = $manager->read($img)->resize(770,520);
-        // $imgs->save('upload/property/multi-image/'.$make_name);
+        // encode edited image
+        $encoded = $imgs->toJpg();
+        // save encoded image
+        $encoded->save('upload/property/multi-image/'.$make_name);
         $uploadPath= 'upload/property/multi-image/'.$make_name;
+
 
         MultiImage::insert([
 
