@@ -146,6 +146,7 @@ class PropertyController extends Controller
 
     public function EditProperty($id){
 
+        $facilities = Facility::where('property_id',$id)->get();
         $property = Property::findOrFail($id);
 
         $type = $property->amenities_id;
@@ -159,7 +160,8 @@ class PropertyController extends Controller
             latest()->get();
 
         return view('backend.property.edit_property',
-            compact('property','propertyType','amenities','activeAgent','property_ami','multiImage'));
+            compact('property','propertyType','amenities','activeAgent','property_ami',
+            'multiImage','facilities'));
 
     }//End Method
 
@@ -299,6 +301,68 @@ class PropertyController extends Controller
 
         return redirect()->back()->with($notification);
 
+    
+    }//End Method
+
+
+    public function UpdatePropertyFacilities(Request $request){
+
+        $pid = $request->id;
+
+        if($request->facility_name == null){
+            return redirect()->back();
+        }else{
+            Facility::where('property_id',$pid)->delete();
+
+            
+            $facilities = Count($request->facility_name);
+
+            for($i=0; $i<$facilities ; $i++){
+                $fcount = new Facility();
+                $fcount->property_id = $pid;
+                $fcount->facility_name = $request->facility_name[$i];
+                $fcount->distance = $request->distance[$i];
+                $fcount->save();
+            }//End for
+        }
+
+        $notification = array(
+            'message' => 'Property Facility Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    
+    }//End Method
+
+
+    public function DeleteProperty($id){
+
+        $property = Property::findOrFail($id);
+        unlink($property->property_thumbnail);
+
+        Property::findOrFail($id)->delete();
+
+        $image = MultiImage::where('property_id',$id)->get();
+        
+        foreach($image as $img){
+            unlink($img->photo_name);
+            MultiImage::where('property_id',$id)->delete();
+        }
+
+        $facilitiesData = Facility::where('property_id',$id)->get();
+
+        foreach($facilitiesData as $item){
+            $item->facility_name;
+            Facility::where('property_id',$id)->delete();
+        }
+
+        $notification = array(
+            'message' => 'Property Deleted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
     
     }//End Method
 

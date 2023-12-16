@@ -112,11 +112,17 @@ Route::controller(PropertyController::class)->group(function(){
     Route::get('/all/property','AllProperty')->name('all.property');
     Route::get('/add/property','AddProperty')->name('add.property');
     Route::post('/store/property','StoreProperty')->name('store.property');
+
     Route::get('/edit/property/{id}','EditProperty')->name('edit.property');
     Route::post('/update/property','UpdateProperty')->name('update.property');
     Route::post('/update/property/thumbnail','UpdatePropertyThumbnail')->name('update.property.thumbnail');
     Route::post('/update/property/multiImage','UpdatePropertyMultiImage')->name('update.property.multiImage');
     Route::get('/property/multiImg/delete/{id}','PropertyMultiImageDelete')->name('property.multiImg.delete');
+    Route::post('/store/new/multiImage','StoreNewMultiImage')->name('store.new.multiImage');
+    Route::post('/update/property/facilities','UpdatePropertyFacilities')->name('update.property.facilities');
+
+    Route::get('/delete/property/{id}','DeleteProperty')->name('delete.property');
+
 
 });
     
