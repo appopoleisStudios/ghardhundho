@@ -393,7 +393,30 @@ class PropertyController extends Controller
         return redirect()->back()->with($notification);
     
     }//End Method
- 
+
+
+    public function DetailsProperty($id){
+
+        $facilities = Facility::where('property_id',$id)->get();
+        $property = Property::findOrFail($id);
+
+        $type = $property->amenities_id;
+        $property_ami = explode(',',$type);
+
+        $multiImage = MultiImage::where('property_id',$id)->get();
+
+        $propertyType = PropertyType::latest()->get();
+        $amenities = Amenities::latest()->get();
+        $activeAgent = User::where('status','active')->where('role','agent')->
+            latest()->get();
+
+        return view('backend.property.details_property',
+            compact('property','propertyType','amenities','activeAgent','property_ami',
+            'multiImage','facilities'));
+
+    }//End Method
+
+
 
 }
     
