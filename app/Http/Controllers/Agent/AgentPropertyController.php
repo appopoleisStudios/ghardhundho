@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -14,30 +14,32 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Carbon\Carbon;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
-class PropertyController extends Controller
+class AgentPropertyController extends Controller
 {
-    public function AllProperty(){        
+    public function AgentAllProperty(){        
         
-        $property = Property::latest()->get();
-        return view('backend.property.all_property',compact('property'));
+        $id = Auth::user()->id;
+        $property = Property::where('agent_id',$id)->latest()->get();
+        return view('agent.property.all_property',compact('property'));
 
     }//End Method
 
-
-    public function AddProperty(){        
+    
+    public function AgentAddProperty(){        
         
         $propertyType = PropertyType::latest()->get();
         $amenities = Amenities::latest()->get();
-        $activeAgent = User::where('status','active')->where('role','agent')->
-            latest()->get();
 
-        return view('backend.property.add_property', compact('propertyType',
-            'amenities','activeAgent'));
+        return view('agent.property.add_property', compact('propertyType',
+            'amenities'));
 
     }//End Method
 
-    public function StoreProperty(Request $request){
+    
+    public function AgentStoreProperty(Request $request){
 
         // create image manager with desired driver
         $manager = new ImageManager(new Driver());
@@ -86,7 +88,7 @@ class PropertyController extends Controller
             'longitude' => $request->longitude,
             'featured' => $request->featured,
             'hot' => $request->hot,
-            'agent_id' => $request->agent_id,
+            'agent_id' => Auth::user()->id,
             'status' => 1,
             'property_thumbnail' => $save_url,
             'created_at' => Carbon::now(),
@@ -140,11 +142,12 @@ class PropertyController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('all.property')->with($notification);
+        return redirect()->route('agent.all.property')->with($notification);
 
     }//End Method
 
-    public function EditProperty($id){
+    
+    public function AgentEditProperty($id){
 
         $facilities = Facility::where('property_id',$id)->get();
         $property = Property::findOrFail($id);
@@ -156,17 +159,15 @@ class PropertyController extends Controller
 
         $propertyType = PropertyType::latest()->get();
         $amenities = Amenities::latest()->get();
-        $activeAgent = User::where('status','active')->where('role','agent')->
-            latest()->get();
 
-        return view('backend.property.edit_property',
-            compact('property','propertyType','amenities','activeAgent','property_ami',
+        return view('agent.property.edit_property',
+            compact('property','propertyType','amenities','property_ami',
             'multiImage','facilities'));
 
     }//End Method
 
 
-    public function UpdateProperty(Request $request){
+    public function AgentUpdateProperty(Request $request){
 
         $amen = $request->amenities_id;
         $amenities = implode(',',$amen);
@@ -202,7 +203,7 @@ class PropertyController extends Controller
             'longitude' => $request->longitude,
             'featured' => $request->featured,
             'hot' => $request->hot,
-            'agent_id' => $request->agent_id,
+            'agent_id' => Auth::user()->id,
             'updated_at' => Carbon::now(),
 
         ]);
@@ -212,12 +213,12 @@ class PropertyController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('all.property')->with($notification);
+        return redirect()->route('agent.all.property')->with($notification);
 
     }//End Method
 
-
-    public function UpdatePropertyThumbnail(Request $request){
+    
+    public function AgentUpdatePropertyThumbnail(Request $request){
 
         $manager = new ImageManager(new Driver());
 
@@ -248,11 +249,10 @@ class PropertyController extends Controller
 
         return redirect()->back()->with($notification);
 
-    
     }//End Method
 
-
-    public function UpdatePropertyMultiImage(Request $request){
+    
+    public function AgentUpdatePropertyMultiImage(Request $request){
 
         $manager = new ImageManager(new Driver());
 
@@ -282,12 +282,11 @@ class PropertyController extends Controller
         );
 
         return redirect()->back()->with($notification);
-
     
     }//End Method
 
-
-    public function PropertyMultiImageDelete($id){
+    
+    public function AgentPropertyMultiImageDelete($id){
 
         $oldImg= MultiImage::findOrFail($id);
         unlink($oldImg->photo_name);
@@ -304,8 +303,8 @@ class PropertyController extends Controller
     
     }//End Method
 
-    
-    public function StoreNewMultiImage(Request $request){
+
+    public function AgentStoreNewMultiImage(Request $request){
 
         $manager = new ImageManager(new Driver());
 
@@ -332,8 +331,9 @@ class PropertyController extends Controller
         return redirect()->back()->with($notification); 
     }// End Method
 
+    
 
-    public function UpdatePropertyFacilities(Request $request){
+    public function AgentUpdatePropertyFacilities(Request $request){
 
         $pid = $request->id;
 
@@ -363,8 +363,29 @@ class PropertyController extends Controller
     
     }//End Method
 
+    
 
-    public function DeleteProperty($id){
+    public function AgentDetailsProperty($id){
+
+        $facilities = Facility::where('property_id',$id)->get();
+        $property = Property::findOrFail($id);
+
+        $type = $property->amenities_id;
+        $property_ami = explode(',',$type);
+
+        $multiImage = MultiImage::where('property_id',$id)->get();
+
+        $propertyType = PropertyType::latest()->get();
+        $amenities = Amenities::latest()->get();
+
+        return view('agent.property.details_property',
+            compact('property','propertyType','amenities','property_ami',
+            'multiImage','facilities'));
+
+    }//End Method
+
+    
+    public function AgentDeleteProperty($id){
 
         $property = Property::findOrFail($id);
         unlink($property->property_thumbnail);
@@ -394,67 +415,4 @@ class PropertyController extends Controller
     
     }//End Method
 
-
-    public function DetailsProperty($id){
-
-        $facilities = Facility::where('property_id',$id)->get();
-        $property = Property::findOrFail($id);
-
-        $type = $property->amenities_id;
-        $property_ami = explode(',',$type);
-
-        $multiImage = MultiImage::where('property_id',$id)->get();
-
-        $propertyType = PropertyType::latest()->get();
-        $amenities = Amenities::latest()->get();
-        $activeAgent = User::where('status','active')->where('role','agent')->
-            latest()->get();
-
-        return view('backend.property.details_property',
-            compact('property','propertyType','amenities','activeAgent','property_ami',
-            'multiImage','facilities'));
-
-    }//End Method
-
-
-    public function InactiveProperty(Request $request){
-
-        $pid = $request->id;
-        Property::findOrFail($pid)->update([
-
-            'status' => 0,
-
-        ]);
-
-      $notification = array(
-            'message' => 'Property Inactive Successfully',
-            'alert-type' => 'success'
-        );
-
-        return redirect()->route('all.property')->with($notification); 
-
-
-    }// End Method 
-
-
-    public function ActiveProperty(Request $request){
-
-        $pid = $request->id;
-        Property::findOrFail($pid)->update([
-
-            'status' => 1,
-
-        ]);
-
-      $notification = array(
-            'message' => 'Property Active Successfully',
-            'alert-type' => 'success'
-        );
-
-        return redirect()->route('all.property')->with($notification); 
-
-
-    }// End Method 
-
 }
-    
