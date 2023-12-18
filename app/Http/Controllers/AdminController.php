@@ -123,5 +123,98 @@ class AdminController extends Controller
 
         }//END Method
 
+
+        //***********Agent User All Method************//
+
+        public function AllAgent(){
+
+            $allAgent = User::where('role','agent')->get();
+            return view('backend.agentUser.all_agent',compact('allAgent'));
+
+        }//END Method
+
+
+        public function AddAgent(){
+
+            return view('backend.agentUser.add_agent');
+
+        }//END Method
+
+
+        public function StoreAgent(Request $request){
+
+            User::insert([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'password' => Hash::make($request->password),
+                'role' => 'agent',
+                'status' => 'active',
+            ]);
+            
+            $notification = array(
+                'message' => 'Agent Created Successfully',
+                'alert-type' => 'success'
+            );
+
+            return redirect()->route('all.agent')->with($notification);
+
+        }//END Method
+
+        
+        public function EditAgent($id){
+
+            $allAgent = User::findOrFail($id);
+            return view('backend.agentUser.edit_agent',compact('allAgent'));
+
+        }//END Method
+
+        
+        public function UpdateAgent(Request $request){
+
+            $user_id = $request->id;
+
+            User::findOrFail($user_id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+            ]);
+            
+            $notification = array(
+                'message' => 'Agent Updated Successfully',
+                'alert-type' => 'success'
+            );
+
+            return redirect()->route('all.agent')->with($notification);
+
+        }//END Method
+
+        
+        public function DeleteAgent($id){
+
+            User::findOrFail($id)->delete();
+             
+            $notification = array(
+                'message' => 'Agent Deleted Successfully',
+                'alert-type' => 'success'
+            );
+
+            return redirect()->back()->with($notification);
+
+        }//END Method
+
+        
+        public function changeStatus(Request $request){
+
+            $user = User::find($request->user_id);
+            $user->status = $request->status;
+            $user->save();
+             
+            return response()->json(['success'=>'Status Change Successfully']);
+
+        }//END Method
+
 }
 
