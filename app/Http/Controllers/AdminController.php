@@ -15,26 +15,28 @@ class AdminController extends Controller
         
     }//END Method
 
-public function AdminLogout(Request $request){
-
-            Auth::guard('web')->logout();
     
-            $request->session()->invalidate();
-    
-            $request->session()->regenerateToken();
+    public function AdminLogin(){
 
-            $notification = array(
-                'message' => 'Admin Logout Successfully',
-                'alert-type' => 'success'
-            );
-    
-            return redirect('/admin/login')->with($notification);
+        return view('admin.admin_login');
 
-        }//END Method
+    }//END Method
 
-        public function AdminLogin(){
 
-            return view('admin.admin_login');
+        public function AdminLogout(Request $request){
+
+                Auth::guard('web')->logout();
+        
+                $request->session()->invalidate();
+        
+                $request->session()->regenerateToken();
+
+                $notification = array(
+                    'message' => 'Admin Logout Successfully',
+                    'alert-type' => 'success'
+                );
+        
+                return redirect('/admin/login')->with($notification);
 
         }//END Method
 
