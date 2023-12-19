@@ -40,19 +40,23 @@
                 <li class="nav-item">
                   <a href="{{route('agent.all.property')}}" class="nav-link">All Property</a>
                 </li>
-                <li class="nav-item">
-                  <a href="{{route('agent.add.property')}}" class="nav-link">Add Property</a>
-                </li>
               </ul>
             </div>
           </li>
 
           <li class="nav-item">
-            <a href="pages/apps/calendar.html" class="nav-link">
+            <a href="{{route('buy.package')}}" class="nav-link">
               <i class="link-icon" data-feather="calendar"></i>
-              <span class="link-title">Calendar</span>
+              <span class="link-title">Buy Package</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('package.history') }}" class="nav-link">
+              <i class="link-icon" data-feather="calendar"></i>
+              <span class="link-title">Package History </span>
+            </a>
+          </li>
+          
           <li class="nav-item nav-category">Components</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button" aria-expanded="false" aria-controls="uiComponents">

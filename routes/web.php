@@ -78,9 +78,9 @@ require __DIR__.'/auth.php';
         Route::get('/agent/logout', [AgentController::class, 'AgentLogout'])->name('agent.logout');
         Route::get('/agent/profile', [AgentController::class, 'AgentProfile'])->name('agent.profile');
         Route::post('/agent/profile/store', [AgentController::class, 'AgentProfileStore'])->name('agent.profile.store');
-        Route::get('/agent/change/password', [AgentController::class, 'AgentChangePassword'])->name('agent.change.password');
         Route::post('/agent/update/password', [AgentController::class, 'AgentUpdatePassword'])->name('agent.update.password');
-
+        Route::get('/agent/change/password', [AgentController::class, 'AgentChangePassword'])->name('agent.change.password');
+        
 
 }); //End Group Agent Middleware
 
@@ -177,23 +177,36 @@ Route::middleware(['auth','role:agent'])->group(function(){
     //Agent All Property
     Route::controller(AgentPropertyController::class)->group(function(){
 
-    Route::get('/agent/all/property','AgentAllProperty')->name('agent.all.property');
-    Route::get('/agent/add/property','AgentAddProperty')->name('agent.add.property');
-    Route::post('/agent/store/property','AgentStoreProperty')->name('agent.store.property');
-    Route::get('/agent/edit/property/{id}','AgentEditProperty')->name('agent.edit.property');
-    Route::post('/agent/update/property','AgentUpdateProperty')->name('agent.update.property');
+        Route::get('/agent/all/property','AgentAllProperty')->name('agent.all.property');
+        Route::get('/agent/add/property','AgentAddProperty')->name('agent.add.property');
+        Route::post('/agent/store/property','AgentStoreProperty')->name('agent.store.property');
+        Route::get('/agent/edit/property/{id}','AgentEditProperty')->name('agent.edit.property');
+        Route::post('/agent/update/property','AgentUpdateProperty')->name('agent.update.property');
 
-    Route::post('/agent/update/property/thumbnail','AgentUpdatePropertyThumbnail')->name('agent.update.property.thumbnail');
-    Route::post('/agent/update/property/multiImage','AgentUpdatePropertyMultiImage')->name('agent.update.property.multiImage');
-    Route::get('/agent/property/multiImg/delete/{id}','AgentPropertyMultiImageDelete')->name('agent.property.multiImg.delete');
-    Route::post('/agent/store/new/multiImage','AgentStoreNewMultiImage')->name('agent.store.new.multiImage');
-    
-    Route::post('/agent/update/property/facilities','AgentUpdatePropertyFacilities')->name('agent.update.property.facilities');
+        Route::post('/agent/update/property/thumbnail','AgentUpdatePropertyThumbnail')->name('agent.update.property.thumbnail');
+        Route::post('/agent/update/property/multiImage','AgentUpdatePropertyMultiImage')->name('agent.update.property.multiImage');
+        Route::get('/agent/property/multiImg/delete/{id}','AgentPropertyMultiImageDelete')->name('agent.property.multiImg.delete');
+        Route::post('/agent/store/new/multiImage','AgentStoreNewMultiImage')->name('agent.store.new.multiImage');
+        
+        Route::post('/agent/update/property/facilities','AgentUpdatePropertyFacilities')->name('agent.update.property.facilities');
 
-    Route::get('/agent/details/property/{id}','AgentDetailsProperty')->name('agent.details.property');
+        Route::get('/agent/details/property/{id}','AgentDetailsProperty')->name('agent.details.property');
 
-    Route::get('/agent/delete/property/{id}','AgentDeleteProperty')->name('agent.delete.property');
+        Route::get('/agent/delete/property/{id}','AgentDeleteProperty')->name('agent.delete.property');
 
+    });
+
+
+    /// Agent Buy Package Route from
+    Route::controller(AgentPropertyController::class)->group(function(){
+        
+        Route::get('/buy/package', 'BuyPackage')->name('buy.package');
+        Route::get('/buy/business/plan', 'BuyBusinessPlan')->name('buy.business.plan');
+        Route::post('/store/business/plan', 'StoreBusinessPlan')->name('store.business.plan');
+        Route::get('/buy/professional/plan', 'BuyProfessionalPlan')->name('buy.professional.plan');
+        Route::post('/store/professional/plan', 'StoreProfessionalPlan')->name('store.professional.plan');
+        Route::get('/package/history', 'PackageHistory')->name('package.history');
+        Route::get('/agent/package/invoice/{id}', 'AgentPackageInvoice')->name('agent.package.invoice');
 
     });
 
