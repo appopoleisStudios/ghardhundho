@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 use App\Http\Controllers\Agent\AgentPropertyController;
+use App\Http\Controllers\Frontend\IndexController;
 
 
 /*
@@ -213,3 +214,8 @@ Route::middleware(['auth','role:agent'])->group(function(){
     });
 
 }); //End Group Agent Middleware
+
+
+//Frontend Property Details All Route
+
+Route::get('/property/details/{id}/{slug}', [IndexController::class, 'PropertyDetails']); 

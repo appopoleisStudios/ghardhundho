@@ -63,7 +63,7 @@ class PropertyController extends Controller
             'ptype_id' => $request->ptype_id,
             'amenities_id' => $amenities,
             'property_name' => $request->property_name,
-            'property_slug' => strtolower(str_replace(' ','-',$request->property_slug)),
+            'property_slug' => strtolower(str_replace(' ', '-', $request->property_name)),
             'property_code' => $pcode,
             'property_status' => $request->property_status,
 
@@ -180,7 +180,7 @@ class PropertyController extends Controller
             'ptype_id' => $request->ptype_id,
             'amenities_id' => $amenities,
             'property_name' => $request->property_name,
-            'property_slug' => strtolower(str_replace(' ','-',$request->property_slug)),
+            'property_slug' => strtolower(str_replace(' ', '-', $request->property_name)), 
             'property_status' => $request->property_status,
 
             'lowest_price' => $request->lowest_price,
