@@ -11,6 +11,7 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\WishlistController;
 
 
 /*
@@ -49,6 +50,14 @@ Route::middleware('auth')->group(function () {
     
     Route::post('/user/password/update', [UserController::class, 'UserPasswordUpdate'])->name('user.password.update');
 
+     // User WishlistAll Route 
+    Route::controller(WishlistController::class)->group(function(){
+
+        Route::get('/user/wishlist', 'UserWishlist')->name('user.wishlist'); 
+        Route::get('/get-wishlist-property', 'GetWishlistProperty'); 
+        Route::get('/wishlist-remove/{id}', 'WishlistRemove'); 
+        
+    });
 });
 
 require __DIR__.'/auth.php';
@@ -218,4 +227,7 @@ Route::middleware(['auth','role:agent'])->group(function(){
 
 //Frontend Property Details All Route
 
-Route::get('/property/details/{id}/{slug}', [IndexController::class, 'PropertyDetails']); 
+Route::get('/property/details/{id}/{slug}', [IndexController::class, 'PropertyDetails']);
+
+// Wishlist Add Route 
+Route::post('/add-to-wishList/{property_id}', [WishlistController::class, 'AddToWishList']);
