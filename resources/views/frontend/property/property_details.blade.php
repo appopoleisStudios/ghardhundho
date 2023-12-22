@@ -242,7 +242,7 @@
 
              @if($property->agent_id == Null)
 
-              <figure class="author-thumb"><img src="{{ url('upload/ariyan.jpg') }}" alt=""></figure>
+              <figure class="author-thumb"><img src="{{ url('upload/admin.png') }}" alt=""></figure>
                 <div class="inner">
                     <h4>Admin </h4>
                     <ul class="info clearfix">
