@@ -202,10 +202,10 @@
                     <i class="far fa-compass"></i>
                     <select class="wide">
                     <option data-display="Input location">Input location</option>
-                    <option value="1">New York</option>
-                    <option value="2">California</option>
-                    <option value="3">London</option>
-                    <option value="4">Maxico</option>
+                    <option value="1">Mumbai</option>
+                    <option value="2">Pune</option>
+                    <option value="3">Gujrat</option>
+                    <option value="4">Karnataka</option>
                     </select>
                 </div>
             </div>
