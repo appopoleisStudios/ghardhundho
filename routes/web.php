@@ -247,3 +247,8 @@ Route::post('/add-to-wishList/{property_id}', [WishlistController::class, 'AddTo
 
 // Compare Add Route 
 Route::post('/add-to-compare/{property_id}', [CompareController::class, 'AddToCompare']);
+
+// Send Message from Property Details Page 
+Route::post('/property/message', [IndexController::class, 'PropertyMessage'])->name('property.message');
+
+

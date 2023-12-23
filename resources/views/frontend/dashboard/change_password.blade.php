@@ -10,7 +10,7 @@
             <div class="content-box clearfix">
                 <h1>Change Password</h1>
                 <ul class="bread-crumb clearfix">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="">Home</a></li>
                     <li>Change Password</li>
                 </ul>
             </div>

@@ -15,12 +15,12 @@
                         <span>Download</span>
                         <h2>Download Our Android and IOS App for Experience</h2>
                         <div class="download-btn">
-                            <a href="index.html" class="app-store">
+                            <a href="" class="app-store">
                                 <i class="fab fa-apple"></i>
                                 <p>Download on</p>
                                 <h4>App Store</h4>
                             </a>
-                            <a href="index.html" class="google-play">
+                            <a href="" class="google-play">
                                 <i class="fab fa-google-play"></i>
                                 <p>Get It On</p>
                                 <h4>Google Play</h4>

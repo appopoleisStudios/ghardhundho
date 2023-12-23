@@ -12,7 +12,7 @@
                 <div class="content-box clearfix">
                     <h1>WishList Property </h1>
                     <ul class="bread-crumb clearfix">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="">Home</a></li>
                         <li>WishList Property</li>
                     </ul>
                 </div>

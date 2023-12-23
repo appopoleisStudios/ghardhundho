@@ -17,7 +17,7 @@
         <div class="tab active-tab" id="tab-1">
         <div class="inner-box">
         <div class="top-search">
-        <form action="index.html" method="post" class="search-form">
+        <form action="" method="post" class="search-form">
         <div class="row clearfix">
         <div class="col-lg-4 col-md-12 col-sm-12 column">
             <div class="form-group">
@@ -35,10 +35,10 @@
                     <i class="far fa-compass"></i>
                     <select class="wide">
                     <option data-display="Input location">Input location</option>
-                    <option value="1">New York</option>
-                    <option value="2">California</option>
-                    <option value="3">London</option>
-                    <option value="4">Maxico</option>
+                    <option value="1">Mumbai</option>
+                    <option value="2">Pune</option>
+                    <option value="3">Goa</option>
+                    <option value="4">Karnataka</option>
                     </select>
                 </div>
             </div>
@@ -184,7 +184,7 @@
         <div class="tab" id="tab-2">
         <div class="inner-box">
         <div class="top-search">
-        <form action="index.html" method="post" class="search-form">
+        <form action="" method="post" class="search-form">
         <div class="row clearfix">
         <div class="col-lg-4 col-md-12 col-sm-12 column">
             <div class="form-group">

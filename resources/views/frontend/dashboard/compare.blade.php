@@ -12,7 +12,7 @@
                 <div class="content-box clearfix">
                     <h1>Compare Properties</h1>
                     <ul class="bread-crumb clearfix">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="">Home</a></li>
                         <li>Compare Properties</li>
                     </ul>
                 </div>
