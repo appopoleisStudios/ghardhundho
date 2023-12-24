@@ -63,8 +63,6 @@ class IndexController extends Controller
 
         return redirect()->back()->with($notification);
 
-
-
         }else{
 
             $notification = array(
@@ -75,5 +73,58 @@ class IndexController extends Controller
         return redirect()->back()->with($notification);
         }
 
+    }// End Method
+
+    
+    public function AgentDetails($id){
+
+        $agent = User::findOrFail($id);
+        $property = Property::where('agent_id',$id)->get();
+        $featured = Property::where('featured','1')->limit(3)->get();
+
+        return view('frontend.agent.agent_details',compact('agent','property','featured'));
     }// End Method 
+
+
+    
+    public function AgentDetailsMessage(Request $request){
+
+            $aid = $request->agent_id;
+
+            if (Auth::check()) {
+
+            PropertyMessage::insert([
+
+                'user_id' => Auth::user()->id,
+                'agent_id' => $aid, 
+                'msg_name' => $request->msg_name,
+                'msg_email' => $request->msg_email,
+                'msg_phone' => $request->msg_phone,
+                'message' => $request->message,
+                'created_at' => Carbon::now(), 
+
+            ]);
+
+            $notification = array(
+                'message' => 'Send Message Successfully',
+                'alert-type' => 'success'
+            );
+
+            return redirect()->back()->with($notification);
+
+
+
+            }else{
+
+                $notification = array(
+                'message' => 'Plz Login Your Account First',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->back()->with($notification);
+            }
+
+        }// End Method 
+
+
 }
