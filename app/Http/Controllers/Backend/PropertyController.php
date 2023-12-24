@@ -10,12 +10,15 @@ use App\Models\Facility;
 use App\Models\Amenities;
 use App\Models\PropertyType;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Carbon\Carbon;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use App\Models\PackagePlan;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\PropertyMessage;
+
 
 class PropertyController extends Controller
 {
@@ -478,5 +481,22 @@ class PropertyController extends Controller
 
     }// End Method 
 
+
+    public function AdminPropertyMessage(){
+
+        $usermsg = PropertyMessage::latest()->get();
+        return view('backend.message.all_message',compact('usermsg'));
+
+    }// End Method 
+
+    
+
+    public function AdminMessageDetails($id){
+
+        $usermsg = PropertyMessage::latest()->get();
+        $msgdetails = PropertyMessage::findOrFail($id);
+        return view('backend.message.message_details',compact('usermsg','msgdetails'));
+
+    }// End Method  
 }
     

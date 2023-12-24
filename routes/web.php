@@ -166,16 +166,17 @@ Route::controller(PropertyController::class)->group(function(){
     Route::post('/update/property/facilities','UpdatePropertyFacilities')->name('update.property.facilities');
 
     Route::get('/delete/property/{id}','DeleteProperty')->name('delete.property');
-    
     Route::get('/details/property/{id}','DetailsProperty')->name('details.property');
-
     Route::post('/inactive/property', 'InactiveProperty')->name('inactive.property');
-
     Route::post('/active/property', 'ActiveProperty')->name('active.property');
-
     Route::get('/admin/package/history', 'AdminPackageHistory')->name('admin.package.history');
-
     Route::get('/package/invoice/{id}', 'PackageInvoice')->name('package.invoice');
+
+    Route::get('/admin/property/message/', 'AdminPropertyMessage')->name('admin.property.message');
+    
+    Route::get('/admin/message/details/{id}', 'AdminMessageDetails')->name('admin.message.details');   
+
+
 });
 
 
@@ -214,10 +215,11 @@ Route::middleware(['auth','role:agent'])->group(function(){
         Route::post('/agent/store/new/multiImage','AgentStoreNewMultiImage')->name('agent.store.new.multiImage');
         
         Route::post('/agent/update/property/facilities','AgentUpdatePropertyFacilities')->name('agent.update.property.facilities');
-
         Route::get('/agent/details/property/{id}','AgentDetailsProperty')->name('agent.details.property');
-
         Route::get('/agent/delete/property/{id}','AgentDeleteProperty')->name('agent.delete.property');
+
+        Route::get('/agent/property/message/', 'AgentPropertyMessage')->name('agent.property.message');  
+        Route::get('/agent/message/details/{id}', 'AgentMessageDetails')->name('agent.message.details');   
 
     });
 
