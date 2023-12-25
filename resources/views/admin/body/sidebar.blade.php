@@ -38,6 +38,46 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#state" role="button" aria-expanded="false" aria-controls="emails">
+              <i class="link-icon" data-feather="mail"></i>
+              <span class="link-title">Property State </span>
+              <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
+            <div class="collapse" id="state">
+              <ul class="nav sub-menu">
+                <li class="nav-item">
+                  <a href="{{ route('all.state') }}" class="nav-link">All State</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('add.state')}}" class="nav-link">Add State</a>
+                </li>
+
+              </ul>
+            </div>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#state" role="button" aria-expanded="false" aria-controls="emails">
+              <i class="link-icon" data-feather="mail"></i>
+              <span class="link-title">Property City </span>
+              <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
+            <div class="collapse" id="state">
+              <ul class="nav sub-menu">
+                <li class="nav-item">
+                  <a href="{{ route('all.city') }}" class="nav-link">All City</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('add.city')}}" class="nav-link">Add City</a>
+                </li>
+
+              </ul>
+            </div>
+          </li>
+
+
+          <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#amenities" role="button" aria-expanded="false" aria-controls="emails">
               <i class="link-icon" data-feather="mail"></i>
               <span class="link-title">Amenitie</span>

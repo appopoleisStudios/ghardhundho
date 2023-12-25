@@ -18,6 +18,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 use App\Models\PackagePlan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\PropertyMessage;
+use App\Models\State;
 
 
 class PropertyController extends Controller
@@ -33,12 +34,13 @@ class PropertyController extends Controller
     public function AddProperty(){        
         
         $propertyType = PropertyType::latest()->get();
+        $pstate = State::latest()->get();
         $amenities = Amenities::latest()->get();
         $activeAgent = User::where('status','active')->where('role','agent')->
             latest()->get();
 
         return view('backend.property.add_property', compact('propertyType',
-            'amenities','activeAgent'));
+            'amenities','activeAgent','pstate'));
 
     }//End Method
 
@@ -159,6 +161,7 @@ class PropertyController extends Controller
 
         $multiImage = MultiImage::where('property_id',$id)->get();
 
+        $pstate = State::latest()->get();
         $propertyType = PropertyType::latest()->get();
         $amenities = Amenities::latest()->get();
         $activeAgent = User::where('status','active')->where('role','agent')->
@@ -166,7 +169,7 @@ class PropertyController extends Controller
 
         return view('backend.property.edit_property',
             compact('property','propertyType','amenities','activeAgent','property_ami',
-            'multiImage','facilities'));
+            'multiImage','facilities','pstate'));
 
     }//End Method
 
