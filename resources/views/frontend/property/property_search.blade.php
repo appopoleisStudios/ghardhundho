@@ -10,10 +10,10 @@
             </div>
             <div class="auto-container">
                 <div class="content-box clearfix">
-                    <h1>Rent Property </h1>
+                    <h1>  Property Search </h1>
                     <ul class="bread-crumb clearfix">
                         <li><a href="index.html">Home</a></li>
-                        <li>Rent Property List</li>
+                        <li>Property Search</li>
                     </ul>
                 </div>
             </div>
@@ -43,9 +43,9 @@ $ptypes = App\Models\PropertyType::latest()->get();
     <div class="widget-content">
         <div class="select-box">
             <select name="property_status" class="wide">
-                <option data-display="All Type">All Status</option>
-                <option value="rent">Rent</option>
-                <option value="buy">Buy</option> 
+               <option data-display="All Type">All Status</option>
+               <option value="rent">Rent</option>
+               <option value="buy">Buy</option> 
             </select>
         </div>
         <div class="select-box">
@@ -68,22 +68,22 @@ $ptypes = App\Models\PropertyType::latest()->get();
         </div>
         <div class="select-box">
             <select name="bedrooms" class="wide">
-                <option data-display="Rooms">Max Rooms</option>
-                <option value="1">1 Rooms</option>
-                <option value="2">2 Rooms</option>
-                <option value="3">3 Rooms</option>
-                <option value="4">4 Rooms</option>
-                <option value="5">5 Rooms</option>
+               <option data-display="Rooms">Max Rooms</option>
+               <option value="1">1 Rooms</option>
+               <option value="2">2 Rooms</option>
+               <option value="3">3 Rooms</option>
+               <option value="4">4 Rooms</option>
+               <option value="5">5 Rooms</option>
             </select>
         </div>
         <div class="select-box">
             <select name="bathrooms" class="wide">
-                <option data-display="BathRooms">Max BathRoom</option>
-                <option value="1">1 BathRoom</option>
-                <option value="2">2 BathRoom</option>
-                <option value="3">3 BathRoom</option>
-                <option value="4">4 BathRoom</option>
-                <option value="5">5 BathRoom</option>
+               <option data-display="BathRooms">Max BathRoom</option>
+               <option value="1">1 BathRoom</option>
+               <option value="2">2 BathRoom</option>
+               <option value="3">3 BathRoom</option>
+               <option value="4">4 BathRoom</option>
+               <option value="5">5 BathRoom</option>
             </select>
         </div>
 
@@ -92,6 +92,7 @@ $ptypes = App\Models\PropertyType::latest()->get();
         </div>
     </div>
 </form>
+
 
 
                             </div>
@@ -117,7 +118,7 @@ $ptypes = App\Models\PropertyType::latest()->get();
                                     <li><a href="{{ route('buy.property') }}">For Buy <span>({{ count($buyproperty) }})</span></a></li>
                                 </ul>
                             </div>
-                             
+
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-12 col-sm-12 content-side">
@@ -127,13 +128,13 @@ $ptypes = App\Models\PropertyType::latest()->get();
             <h5>Search Reasults: <span>Showing {{ count($property) }} Listings</span></h5>
                                 </div>
                                 <div class="right-column pull-right clearfix">
-                                     
-                                   
+
+
                                 </div>
                             </div>
                             <div class="wrapper list">
                                 <div class="deals-list-content list-item">
-                                 
+
 
 
      @foreach($property as $item)
@@ -147,7 +148,7 @@ $ptypes = App\Models\PropertyType::latest()->get();
                        @else
                         <span class="category">New</span>
                        @endif
-                       
+
 
                         <div class="buy-btn"><a href="property-details.html">For {{ $item->property_status }}</a></div>
                     </div>
@@ -158,7 +159,7 @@ $ptypes = App\Models\PropertyType::latest()->get();
                                 <h6>Start From</h6>
                                 <h4>${{ $item->lowest_price }}</h4>
                             </div>
-   
+
   @if($item->agent_id == Null)
 <div class="author-box pull-right">
         <figure class="author-thumb"> 
@@ -187,7 +188,7 @@ $ptypes = App\Models\PropertyType::latest()->get();
                             <div class="btn-box pull-left"><a href="{{ url('property/details/'.$item->id.'/'.$item->property_slug) }}" class="theme-btn btn-two">See Details</a></div>
                             <ul class="other-option pull-right clearfix">
              <li><a aria-label="Compare" class="action-btn" id="{{ $item->id }}" onclick="addToCompare(this.id)"><i class="icon-12"></i></a></li>
-       
+
         <li><a aria-label="Add To Wishlist" class="action-btn" id="{{ $item->id }}" onclick="addToWishList(this.id)" ><i class="icon-13"></i></a></li>
                             </ul>
                         </div>
@@ -198,12 +199,12 @@ $ptypes = App\Models\PropertyType::latest()->get();
 
 
 
-                                 
+
                                 </div>
-                               
+
                             </div>
                             <div class="pagination-wrapper">
-                                {{ $property->links('vendor.pagination.custom') }}
+                                {{-- {{ $property->links('vendor.pagination.custom') }} --}}
                             </div>
                         </div>
                     </div>
@@ -238,6 +239,11 @@ $ptypes = App\Models\PropertyType::latest()->get();
             </div>
         </section>
         <!-- subscribe-section end -->
+
+
+
+
+
 
 
 @endsection
