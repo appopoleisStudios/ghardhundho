@@ -1,5 +1,5 @@
 @php
- $tesimonials = App\Models\Testimonial::latest()->get();
+ $testimonials = App\Models\Testimonial::latest()->get();
 @endphp
 
   <section class="testimonial-section bg-color-1 centred">
@@ -11,7 +11,7 @@
                 </div>
                 <div class="single-item-carousel owl-carousel owl-theme owl-dots-none nav-style-one">
 
-        @foreach($tesimonials as $item)
+        @foreach($testimonials as $item)
         <div class="testimonial-block-one">
             <div class="inner-box">
                 <figure class="thumb-box"><img src="{{ asset($item->image) }}" alt=""></figure>
