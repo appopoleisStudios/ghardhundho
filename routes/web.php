@@ -11,6 +11,7 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Backend\StateController;
 use App\Http\Controllers\Backend\CityController;
 use App\Http\Controllers\Backend\TestimonialController;
+use App\Http\Controllers\Backend\BlogController;
 
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -248,6 +249,18 @@ Route::middleware(['auth','role:admin'])->group(function(){
           Route::get('/delete/testimonials/{id}', 'DeleteTestimonials')->name('delete.testimonials');
           
      });
+
+      // Blog Cateory All Route 
+     Route::controller(BlogController::class)->group(function(){
+
+          Route::get('/all/blog/category', 'AllBlogCategory')->name('all.blog.category'); 
+          Route::post('/store/blog/category', 'StoreBlogCategory')->name('store.blog.category');
+          Route::get('/blog/category/{id}', 'EditBlogCategory');
+          Route::post('/update/blog/category', 'UpdateBlogCategory')->name('update.blog.category');
+          Route::get('/delete/blog/category/{id}', 'DeleteBlogCategory')->name('delete.blog.category');  
+
+     });
+
 
 }); // End Group Admin Middleware
 
