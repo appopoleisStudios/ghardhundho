@@ -11,6 +11,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use App\Models\Comment;
+
 
 class BlogController extends Controller
 {
@@ -254,4 +256,68 @@ class BlogController extends Controller
     
         }// End Method
     
+        //Blog Comments
+        public function StoreComment(Request $request){
+
+            $pid = $request->post_id;
+    
+            Comment::insert([
+                'user_id' => Auth::user()->id,
+                'post_id' => $pid,
+                'parent_id' => null,
+                'subject' => $request->subject,
+                'message' => $request->message,
+                'status' => 1,
+                'created_at' => Carbon::now(),
+    
+            ]);
+    
+              $notification = array(
+                'message' => 'Comment Submitted Successfully',
+                'alert-type' => 'success'
+            );
+    
+            return redirect()->route('')->with($notification); 
+    
+        }// End Method
+    
+    
+        public function AdminBlogComment(){
+
+            $comment = Comment::where('parent_id',null)->latest()->get();
+            return view('backend.comment.comment_all',compact('comment'));
+    
+        }// End Method
+    
+        public function AdminCommentReply($id){
+
+            $comment = Comment::where('id',$id)->first();
+            return view('backend.comment.reply_comment',compact('comment'));
+    
+        }// End Method
+    
+        public function ReplyMessage(Request $request){
+    
+            $id = $request->id;
+            $user_id = $request->user_id;
+            $post_id = $request->post_id;
+    
+            Comment::insert([
+                'user_id' => $user_id,
+                'post_id' => $post_id,
+                'parent_id' => $id,
+                'subject' => $request->subject,
+                'message' => $request->message,
+                'created_at' => Carbon::now(),
+    
+            ]);
+    
+              $notification = array(
+                'message' => 'Reply Send Successfully',
+                'alert-type' => 'success'
+            );
+    
+            return redirect()->route('admin.blog.comment')->with($notification); 
+    
+        }// End Method
 }
