@@ -165,7 +165,7 @@ class IndexController extends Controller
     
         public function StateDetails($id){
 
-            $property = Property::where('status','1')->where('state',$id)->get();
+            $property = Property::where('status','1')->where('state',$id)->paginate(3);
             $rentproperty = Property::where('property_status','rent')->get();
             $buyproperty = Property::where('property_status','buy')->get();
 
