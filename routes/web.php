@@ -281,6 +281,14 @@ Route::middleware(['auth','role:admin'])->group(function(){
 
      });
 
+     // Site Setting  All Route 
+     Route::controller(SettingController::class)->group(function(){
+
+          Route::get('/site/setting', 'SiteSetting')->name('site.setting');
+          Route::post('/update/site/setting', 'UpdateSiteSetting')->name('update.site.setting');  
+     });
+
+
 }); // End Group Admin Middleware
 
 
