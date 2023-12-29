@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\StateController;
 use App\Http\Controllers\Backend\CityController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\SettingController;
 
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -274,6 +275,14 @@ Route::middleware(['auth','role:admin'])->group(function(){
      });
 
 
+      // SMTP Setting  All Route 
+     Route::controller(SettingController::class)->group(function(){
+
+          Route::get('/smtp/setting', 'SmtpSetting')->name('smtp.setting'); 
+          Route::post('/update/smtp/setting', 'UpdateSmtpSetting')->name('update.smtp.setting'); 
+
+     });
+
 }); // End Group Admin Middleware
 
 
@@ -314,6 +323,11 @@ Route::controller(AgentPropertyController::class)->group(function(){
 
       Route::get('/agent/message/details/{id}', 'AgentMessageDetails')->name('agent.message.details');   
 
+      // Schedule Request Route 
+    Route::get('/agent/schedule/request/', 'AgentScheduleRequest')->name('agent.schedule.request');
+    Route::get('/agent/details/schedule/{id}', 'AgentDetailsSchedule')->name('agent.details.schedule');
+    Route::post('/agent/update/schedule/', 'AgentUpdateSchedule')->name('agent.update.schedule'); 
+  
 });
 
 
@@ -384,8 +398,10 @@ Route::get('/blog', [BlogController::class, 'BlogList'])->name('blog.list');
 Route::post('/store/comment', [BlogController::class, 'StoreComment'])->name('store.comment');
 
 Route::middleware(['auth','role:admin'])->group(function(){
-
      Route::get('/admin/blog/comment', [BlogController::class, 'AdminBlogComment'])->name('admin.blog.comment');
      Route::get('/admin/comment/reply/{id}', [BlogController::class, 'AdminCommentReply'])->name('admin.comment.reply');
      Route::post('/reply/message', [BlogController::class, 'ReplyMessage'])->name('reply.message');
 });
+
+ // Schedule Message Request Route 
+ Route::post('/store/schedule', [IndexController::class, 'StoreSchedule'])->name('store.schedule');

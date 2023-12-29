@@ -17,7 +17,8 @@ return new class extends Migration
             $table->integer('post_id')->unsinged();
             $table->integer('parent_id')->unsinged()->nullable();
             $table->text('subject');
-            $table->text('message'); 
+            $table->text('message');
+            $table->string('status')->default(0); 
             $table->timestamps();
         });
     }
