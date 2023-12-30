@@ -1,6 +1,10 @@
 @extends('frontend.frontend_dashboard')
 @section('main')
- 
+
+@section('title')
+    Agent Login | Ghardhundo
+@endsection
+
  
  <!--Page Title-->
  <section class="page-title-two bg-color-1 centred">

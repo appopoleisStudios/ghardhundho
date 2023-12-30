@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\CityController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\Backend\RoleController;
 
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -288,6 +289,18 @@ Route::middleware(['auth','role:admin'])->group(function(){
           Route::post('/update/site/setting', 'UpdateSiteSetting')->name('update.site.setting');  
      });
 
+
+      // Permission All Route 
+     Route::controller(RoleController::class)->group(function(){
+
+          Route::get('/all/permission', 'AllPermission')->name('all.permission'); 
+          Route::get('/add/permission', 'AddPermission')->name('add.permission');
+          Route::post('/store/permission', 'StorePermission')->name('store.permission'); 
+          Route::get('/edit/permission/{id}', 'EditPermission')->name('edit.permission');
+          Route::post('/update/permission', 'UpdatePermission')->name('update.permission');
+          Route::get('/delete/permission/{id}', 'DeletePermission')->name('delete.permission');  
+
+     });
 
 }); // End Group Admin Middleware
 

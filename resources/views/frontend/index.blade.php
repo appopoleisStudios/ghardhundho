@@ -1,5 +1,9 @@
  @extends('frontend.frontend_dashboard')
  @section('main')
+
+ @section('title')
+    Ghardhundo
+ @endsection
  
     <!-- banner-section -->
     @include('frontend.home.banner')
