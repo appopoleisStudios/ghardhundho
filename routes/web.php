@@ -86,7 +86,7 @@ require __DIR__.'/auth.php';
 
 
  /// Admin Group Middleware 
-Route::middleware(['auth','role:admin'])->group(function(){
+Route::middleware(['auth','roles:admin'])->group(function(){
 
  Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard'); 
 
@@ -106,7 +106,7 @@ Route::middleware(['auth','role:admin'])->group(function(){
 
 
  /// Agent Group Middleware 
-Route::middleware(['auth','role:agent'])->group(function(){
+Route::middleware(['auth','roles:agent'])->group(function(){
 
 Route::get('/agent/dashboard', [AgentController::class, 'AgentDashboard'])->name('agent.dashboard');
 
@@ -135,14 +135,14 @@ Route::post('/agent/register', [AgentController::class, 'AgentRegister'])->name(
 
 
   /// Admin Group Middleware 
-Route::middleware(['auth','role:admin'])->group(function(){ 
+Route::middleware(['auth','roles:admin'])->group(function(){ 
 
 
  // Property Type All Route 
      Route::controller(PropertyTypeController::class)->group(function(){
 
-          Route::get('/all/type', 'AllType')->name('all.type'); 
-          Route::get('/add/type', 'AddType')->name('add.type');
+          Route::get('/all/type', 'AllType')->name('all.type')->middleware('permission:all.type'); 
+          Route::get('/add/type', 'AddType')->name('add.type')->middleware('permission:add.type');
           Route::post('/store/type', 'StoreType')->name('store.type'); 
           Route::get('/edit/type/{id}', 'EditType')->name('edit.type');
           Route::post('/update/type', 'UpdateType')->name('update.type');
@@ -327,6 +327,19 @@ Route::middleware(['auth','role:admin'])->group(function(){
 
      });
 
+     
+     // Admin User All Route 
+     Route::controller(AdminController::class)->group(function(){
+
+          Route::get('/all/admin', 'AllAdmin')->name('all.admin');
+          Route::get('/add/admin', 'AddAdmin')->name('add.admin');
+          Route::post('/store/admin', 'StoreAdmin')->name('store.admin');
+          Route::get('/edit/admin/{id}', 'EditAdmin')->name('edit.admin');
+          Route::post('/update/admin/{id}', 'UpdateAdmin')->name('update.admin');
+          Route::get('/delete/admin/{id}', 'DeleteAdmin')->name('delete.admin');
+
+     });
+
 
 }); // End Group Admin Middleware
 
@@ -336,7 +349,7 @@ Route::middleware(['auth','role:admin'])->group(function(){
 
 
  /// Agent Group Middleware 
-Route::middleware(['auth','role:agent'])->group(function(){
+Route::middleware(['auth','roles:agent'])->group(function(){
 
       // Agent All Property  
 Route::controller(AgentPropertyController::class)->group(function(){
