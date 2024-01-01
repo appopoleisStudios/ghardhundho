@@ -46,7 +46,7 @@
 						<h1 class="fw-bolder mb-22 mt-2 tx-80 text-muted">403</h1>
 						<h4 class="mb-2">USER DOES NOT HAVE THE RIGHT PERMISSIONS</h4>
 						<h6 class="text-muted mb-3 text-center">Oopps!! The page you were looking for doesn't exist.</h6>
-						<a href="../../dashboard.html">Back to home</a>
+						<a href="{{route('dashboard')}}">Back to Dashboard</a>
 					</div>
 				</div>
 
