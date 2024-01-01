@@ -1,0 +1,29 @@
+pipeline {
+		agent {
+				label {
+							label "built-in"
+							customWorkspace "/mnt/laravel-build"
+				
+				}
+		}
+		
+		environment {
+						
+						url = "https://github.com/appopoleisStudios/ghardhundho.git"
+		
+		}
+		
+		stages {
+		
+				stage ("ClONE_PROJECT"){
+								
+							steps {
+										sh "rm -rf *"
+										sh "git clone $url"
+							
+							}
+				
+				}
+			}
+
+}			
